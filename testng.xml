@@ -3,7 +3,7 @@
 <suite name="Suite">
   <test name="Test">
     <classes>
-      <class name="VGCAutomationTesting.RTMDashboard.NewTest"/>
+      <class name="VGCAutomationTesting.RTMDashboard.Hello"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
