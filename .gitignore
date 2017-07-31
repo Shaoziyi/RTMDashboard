@@ -1,7 +1,5 @@
 /target/
 test-output/
-log/
-screenshot/
 *.class
 # Package Files #
 *.jar
@@ -9,5 +7,4 @@ screenshot/
 *.ear
 *.exe
 *.classpath
-/SceenPictures/
 .settings/
