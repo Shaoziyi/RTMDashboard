@@ -50,7 +50,7 @@ public class GridDemo
 		driver.get("http://www.bing.com");
 		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 		System.out.println(browser + driver.getTitle());
-		ComUtils.logWriter("Jenkins  ", "log\\log20170731.txt", true);
+		ComUtils.logWriter("Jenkins  ", "log/log20170731.txt", true);
 		Thread.sleep(10000);
 		//      关闭浏览器
 		driver.quit();
