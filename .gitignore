@@ -1,5 +1,7 @@
 /target/
-/test-output/
+test-output/
+log/
+screenshot/
 *.class
 # Package Files #
 *.jar
