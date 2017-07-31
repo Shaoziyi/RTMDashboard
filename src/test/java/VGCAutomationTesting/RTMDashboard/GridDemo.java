@@ -21,9 +21,10 @@ public class GridDemo
 	 * @param browser
 	 *           node 节点的浏览器
 	 * @throws IOException
+	 * @throws InterruptedException
 	 */
 	@Test(dataProvider = "data")
-	public void Testing(final String nodeURL, final String browser) throws IOException
+	public void Testing(final String nodeURL, final String browser) throws IOException, InterruptedException
 	{
 		final DesiredCapabilities desiredCapabilities;
 		//    判断要打开的浏览器
@@ -47,6 +48,7 @@ public class GridDemo
 		driver.get("http://www.bing.com");
 		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 		System.out.println(browser + driver.getTitle());
+		Thread.sleep(10000);
 		//      关闭浏览器
 		driver.quit();
 	}
