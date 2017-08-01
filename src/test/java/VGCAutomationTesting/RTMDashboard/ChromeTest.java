@@ -1,5 +1,7 @@
 package VGCAutomationTesting.RTMDashboard;
 
+import java.net.MalformedURLException;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,9 +30,9 @@ public class ChromeTest
 	}
 
 	@BeforeMethod
-	public void beforeMethod()
+	public void beforeMethod() throws MalformedURLException
 	{
-		driver = ComUtils.getLocalDriver("local", "chrome");
+		driver = ComUtils.getDriver("local", "chrome", "");
 	}
 
 	@AfterMethod

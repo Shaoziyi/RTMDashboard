@@ -1,12 +1,10 @@
 package VGCAutomationTesting.RTMDashboard;
 
 import java.io.IOException;
-import java.net.URL;
+import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -17,6 +15,7 @@ import VGCAutomationTesting.RTMDashboard.comFunction.ComUtils;
 
 public class GridDemo
 {
+	static WebDriver driver = null;
 
 	/**
 	 * @param nodeURL
@@ -25,12 +24,15 @@ public class GridDemo
 	 *           node 节点的浏览器
 	 * @throws IOException
 	 * @throws InterruptedException
+	 * @throws MalformedURLException
 	 */
-	static WebDriver driver = null;
 
 	@Test(dataProvider = "data")
-	public void Testing(final String nodeURL, final String browser) throws InterruptedException
+	public void Testing(final String nodeURL, final String browser) throws InterruptedException, MalformedURLException
 	{
+
+		driver = ComUtils.getDriver("remote", "browser", "nodeURL");
+		//driver = ComUtils.getDriver("local", "chrome", "");
 		//      打开百度
 		driver.get("http://www.bing.com");
 		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
@@ -42,33 +44,15 @@ public class GridDemo
 	}
 
 	@BeforeMethod
-	public void beforeMethod(final String nodeURL, final String browser) throws IOException, InterruptedException
+	public void beforeMethod()
 	{
-		final DesiredCapabilities desiredCapabilities;
-		//    判断要打开的浏览器
-		if (browser == "chrome")
-		{
-			desiredCapabilities = DesiredCapabilities.chrome();
-		}
-		else if (browser == "ie")
-		{
-			desiredCapabilities = DesiredCapabilities.internetExplorer();
-		}
-		else
-		{
-			desiredCapabilities = DesiredCapabilities.firefox();
-		}
 
-		final String url = nodeURL + "/wd/hub";
-		//获得WebDriver
-		driver = new RemoteWebDriver(new URL(url), desiredCapabilities);
 	}
 
 	@AfterMethod
 	public void afterMethod()
 	{
 	}
-
 
 	@DataProvider(name = "data", parallel = true)
 	public Object[][] data()

@@ -3,9 +3,13 @@ package VGCAutomationTesting.RTMDashboard.comFunction;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 
 public class ComUtils
@@ -86,13 +90,32 @@ public class ComUtils
 	/**
 	 * @param browser
 	 * @return
+	 * @throws MalformedURLException
 	 */
-	public static WebDriver getLocalDriver(final String location, final String browser)
+	public static WebDriver getDriver(final String location, final String browser, final String nodeURL)
+			throws MalformedURLException
 	{
 		WebDriver driver = null;
 		if (location == "remote")
 		{
+			final DesiredCapabilities desiredCapabilities;
+			//    判断要打开的浏览器
+			if (browser == "chrome")
+			{
+				desiredCapabilities = DesiredCapabilities.chrome();
+			}
+			else if (browser == "ie")
+			{
+				desiredCapabilities = DesiredCapabilities.internetExplorer();
+			}
+			else
+			{
+				desiredCapabilities = DesiredCapabilities.firefox();
+			}
 
+			final String url = nodeURL + "/wd/hub";
+			//获得WebDriver
+			driver = new RemoteWebDriver(new URL(url), desiredCapabilities);
 		}
 		else
 		{
