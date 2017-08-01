@@ -17,6 +17,7 @@ import VGCAutomationTesting.RTMDashboard.comFunction.ComUtils;
 
 public class GridDemo
 {
+
 	/**
 	 * @param nodeURL
 	 *           node 节点的地址
@@ -25,8 +26,23 @@ public class GridDemo
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
+	static WebDriver driver = null;
+
 	@Test(dataProvider = "data")
-	public void Testing(final String nodeURL, final String browser) throws IOException, InterruptedException
+	public void Testing(final String nodeURL, final String browser) throws InterruptedException
+	{
+		//      打开百度
+		driver.get("http://www.bing.com");
+		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+		System.out.println(browser + driver.getTitle());
+		ComUtils.logWriter("Jenkins  ", "log/log20170731.txt", true);
+		Thread.sleep(10000);
+		//      关闭浏览器
+		driver.quit();
+	}
+
+	@BeforeMethod
+	public void beforeMethod(final String nodeURL, final String browser) throws IOException, InterruptedException
 	{
 		final DesiredCapabilities desiredCapabilities;
 		//    判断要打开的浏览器
@@ -45,20 +61,7 @@ public class GridDemo
 
 		final String url = nodeURL + "/wd/hub";
 		//获得WebDriver
-		final WebDriver driver = new RemoteWebDriver(new URL(url), desiredCapabilities);
-		//      打开百度
-		driver.get("http://www.bing.com");
-		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
-		System.out.println(browser + driver.getTitle());
-		ComUtils.logWriter("Jenkins  ", "log/log20170731.txt", true);
-		Thread.sleep(10000);
-		//      关闭浏览器
-		driver.quit();
-	}
-
-	@BeforeMethod
-	public void beforeMethod()
-	{
+		driver = new RemoteWebDriver(new URL(url), desiredCapabilities);
 	}
 
 	@AfterMethod

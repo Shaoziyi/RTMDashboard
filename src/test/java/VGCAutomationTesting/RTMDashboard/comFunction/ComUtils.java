@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
 
 public class ComUtils
 {
@@ -80,4 +83,33 @@ public class ComUtils
 		return isSuccess;
 	}
 
+	/**
+	 * @param browser
+	 * @return
+	 */
+	public static WebDriver getLocalDriver(final String location, final String browser)
+	{
+		WebDriver driver = null;
+		if (location == "remote")
+		{
+
+		}
+		else
+		{
+			System.setProperty("webdriver.chrome.driver", "webDrivers/chromedriver.exe");
+			switch (browser)
+			{
+				case "chrome":
+					driver = new ChromeDriver();
+					break;
+				case "ie":
+					driver = new ChromeDriver();
+					break;
+				case "firefox":
+					driver = new ChromeDriver();
+					break;
+			}
+		}
+		return driver;
+	}
 }
