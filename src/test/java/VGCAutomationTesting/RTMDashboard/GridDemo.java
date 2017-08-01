@@ -30,9 +30,8 @@ public class GridDemo
 	@Test(dataProvider = "data")
 	public void Testing(final String nodeURL, final String browser) throws InterruptedException, MalformedURLException
 	{
-
-		driver = ComUtils.getDriver("remote", "browser", "nodeURL");
-		//driver = ComUtils.getDriver("local", "chrome", "");
+		driver = ComUtils.getDriver("remote", browser, nodeURL);
+		//driver = ComUtils.getDriver("local", browser, nodeURL);
 		//      打开百度
 		driver.get("http://www.bing.com");
 		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
