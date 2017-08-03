@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import VGCAutomationTesting.RTMDashboard.comFunction.ComUtils;
@@ -16,6 +17,7 @@ import VGCAutomationTesting.RTMDashboard.comFunction.ComUtils;
 public class GridDemo
 {
 	static WebDriver driver = null;
+	static String locationType;
 
 	/**
 	 * @param nodeURL
@@ -30,7 +32,7 @@ public class GridDemo
 	@Test(dataProvider = "data")
 	public void Testing(final String nodeURL, final String browser) throws InterruptedException, MalformedURLException
 	{
-		driver = ComUtils.getDriver("remote", browser, nodeURL);
+		driver = ComUtils.getDriver(locationType, browser, nodeURL);
 		//driver = ComUtils.getDriver("local", browser, nodeURL);
 		//      打开百度
 		driver.get("http://www.bing.com");
@@ -42,9 +44,15 @@ public class GridDemo
 		driver.quit();
 	}
 
+	/**
+	 * @param location
+	 */
+	@Parameters(
+	{ "location" })
 	@BeforeMethod
-	public void beforeMethod()
+	public void beforeMethod(final String location)
 	{
+		locationType = location;
 
 	}
 
