@@ -96,7 +96,7 @@ public class ComUtils
 			throws MalformedURLException
 	{
 		WebDriver driver = null;
-		if (location == "remote")
+		if (location.equals("remote"))
 		{
 			final DesiredCapabilities desiredCapabilities;
 			//    判断要打开的浏览器
